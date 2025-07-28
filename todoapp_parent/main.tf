@@ -98,21 +98,3 @@ module "backend-vm" {
   data_public_ip_name     = "prabha-backtend-pip"
 }
 
-module "sql_server" {
-  source = "../modules/azurerm_sql_server"
-
-  sql_server_name              = "prabhaserver121"
-  resource_group_name          = "rg-prabha"
-  location                     = "Central India"
-  administrator_login          = "azureuser"
-  administrator_login_password = "Prabha@321"
-}
-
-module "sql_database" {
-  depends_on = [ module.sql_server ]
-  source = "../modules/azurerm_sql_database"
-
-  sql_database_name         = "prabhadb3212"
-  data_sql_server_name      = "prabhaserver121"
-  resource_group_name       = "rg-prabha"
-}
