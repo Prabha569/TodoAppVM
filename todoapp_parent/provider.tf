@@ -6,16 +6,16 @@ terraform {
     }
   }
 
-#   backend "azurerm" {
-#     resource_group_name  = "rg-prabha"
-#     storage_account_name = "krishnastg567"
-#     container_name       = "tfstate"
-#     key                  = "prod.terraform.tfstate"
-#   }
+  backend "azurerm" {
+    resource_group_name  = "rg-rama"
+    storage_account_name = "krishnastg5678"
+    container_name       = "tfstate"
+    key                  = "prod.terraform.tfstate"
+  }
 
 }
 
 provider "azurerm" {
   features {}
-  subscription_id = "3a734e32-021d-4243-89ff-c3495e6aa4da"
+  subscription_id = "9a19641f-a0da-455d-9b90-51dc0d0cdfee"
 }
