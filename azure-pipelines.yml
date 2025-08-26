@@ -46,12 +46,12 @@ steps:
     workingDirectory: $(config_path) 
     environmentServiceNameAzureRM: 'PrabhaSC-WIF'
 
-- task: TerraformTask@5
-  displayName: Terraform Apply
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    workingDirectory: $(config_path) 
-    commandOptions: '--auto-approve'
-    environmentServiceNameAzureRM: 'PrabhaSC-WIF'
+# - task: TerraformTask@5
+#   displayName: Terraform Apply
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'apply'
+#     workingDirectory: $(config_path) 
+#     commandOptions: '--auto-approve'
+#     environmentServiceNameAzureRM: 'PrabhaSC-WIF'
 
