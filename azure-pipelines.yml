@@ -1,6 +1,10 @@
 trigger: none
 pool: Prabhas-Agent-Pools
 
+variables:
+  config_path: '$(System.DefaultWorkingDirectory)/todoapp_parent'
+
+
 steps:
 - task: TerraformInstaller@1
   displayName: Terraform Install
@@ -12,7 +16,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_parent'
+    workingDirectory: $(config_path)
     backendServiceArm: 'PrabhaSC-WIF'
     backendAzureRmStorageAccountName: 'krishnastg5678'
     backendAzureRmContainerName: 'tfstate'
@@ -23,12 +27,12 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_parent'
+    workingDirectory: $(config_path)
 
 - task: TerraformTask@5
   displayName: Terraform Plan 
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_parent'
+    workingDirectory: $(config_path)
     environmentServiceNameAzureRM: 'PrabhaSC-WIF'
