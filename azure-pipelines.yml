@@ -7,7 +7,6 @@ steps:
   inputs:
     terraformVersion: '1.5.7'  # Avoid using 'latest'
 
-
 - task: TerraformTask@5
   displayName: Terraform Init
   inputs:
