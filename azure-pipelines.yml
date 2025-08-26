@@ -1,8 +1,8 @@
 trigger: none
 pool: Prabhas-Agent-Pools
 
-variables:
-  config_path: '$(System.DefaultWorkingDirectory)/todoapp_infra'
+# variables:
+#   config_path: '$(System.DefaultWorkingDirectory)/todoapp_infra'
 
 
 steps:
@@ -16,7 +16,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: $(config_path) 
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_infra'
     backendServiceArm: 'PrabhaSC-WIF'
     backendAzureRmResourceGroupName: 'rg-rama'
     backendAzureRmStorageAccountName: 'krishnastg5678'
@@ -28,7 +28,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'custom'
-    workingDirectory: $(config_path) 
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_infra'
     outputTo: 'console'
     customCommand: 'fmt'
     environmentServiceNameAzureRM: 'PrabhaSC-WIF'
@@ -44,7 +44,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: $(config_path) 
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_infra'
     environmentServiceNameAzureRM: 'PrabhaSC-WIF'
 
 # - task: TerraformTask@5
