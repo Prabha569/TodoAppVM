@@ -2,7 +2,8 @@ trigger: none
 pool: Prabhas-Agent-Pools
 
 variables:
-  config_path: '$(System.DefaultWorkingdirectory)/todoapp_infra'
+  config_path: '$(System.DefaultWorkingDirectory)/todoapp_infra'
+
 
 steps:
 - task: TerraformInstaller@1
