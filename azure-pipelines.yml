@@ -2,10 +2,10 @@ trigger: none
 pool: Prabhas-Agent-Pools
 
 steps:
-# - task: TerraformInstaller@1
-#   displayName: Terraform Install
-#   inputs:
-#     terraformVersion: '1.5.7'  # Avoid using 'latest'
+- task: TerraformInstaller@1
+  displayName: Terraform Install 
+  inputs:
+    terraformVersion: 'latest'
 
 - task: TerraformTask@5
   displayName: Terraform Init
