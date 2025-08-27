@@ -1,3 +1,7 @@
+trigger: none
+pool: Prabhas-Agent-Pools
+
+
 parameters:
   - name: doStep1
     type: boolean
