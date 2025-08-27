@@ -49,14 +49,14 @@ module "backend_pip" {
   source = "../modules/azurerm_public_ip"
   depends_on = [ module.resource_group ]
 
-  public_ip_name        = "prabha-backtend-pip"
+  public_ip_name        = "prabha-backend-pip"
   resource_group_name   = "rg-prabha"
   location              = "Central India"
   allocation_method     = "Static"
 }
 
 module "frontend-vm" {
-  depends_on = [ module.frontend_subnet ]
+  depends_on = [ module.resource_group, module.frontend_pip, module.frontend_subnet, module.vertual_network ]
   source = "../modules/azurerm_virtual_machine"
 
   network_interface_name  = "nic-frontendVM"
@@ -79,7 +79,7 @@ module "frontend-vm" {
 }
 
 module "backend-vm" {
-  depends_on = [ module.backend_subnet ]
+  depends_on = [ module.resource_group, module.backend_pip, module.backend_subnet, module.vertual_network ]
   source = "../modules/azurerm_virtual_machine"
 
   network_interface_name  = "nic-backendVM"
