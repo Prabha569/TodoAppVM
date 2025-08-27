@@ -46,3 +46,12 @@ steps:
     command: 'plan'
     workingDirectory: $(config_path) 
     environmentServiceNameAzureRM: $(service_conn) 
+
+- task: TerraformTask@5
+  displayName: Terraform Apply 
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(config_path)'
+    commandOptions: '--auto-approve'
+    environmentServiceNameAzureRM: '$(service_conn)'
