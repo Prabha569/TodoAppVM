@@ -100,3 +100,37 @@ module "backend-vm" {
   data_public_ip_name     = "prabha-backend-pip"
 }
 
+
+module "frontend-nsg" {
+  source = "../modules/azurerm_nsg"
+  depends_on = [ module.resource_group ]
+  nsg_name            = "frontend-nsg"
+  nsg_location        = "Central India"
+  resource_group_name = "rg-prabha"
+}
+module "backend-nsg" {
+  source = "../modules/azurerm_nsg"
+  depends_on = [ module.resource_group ]
+  nsg_name            = "backend-nsg"
+  nsg_location        = "Central India"
+  resource_group_name = "rg-prabha"
+}
+
+module "frontend-nic-nsg-associate" {
+  source = "../modules/azurerm_nic_nsg_associate"
+  depends_on = [ module.resource_group,  module.frontend-nsg, module.frontend-vm,   ]
+
+  nic_data_name         = "nic-frontendVM"
+  resource_group_name   = "rg-prabha"
+  nsg_data_name         = "frontend-nsg"
+}
+
+module "backend-nic-nsg-associate" {
+  source = "../modules/azurerm_nic_nsg_associate"
+  depends_on = [ module.resource_group,  module.backend-nsg, module.backend-vm,   ]
+
+  nic_data_name         = "nic-backendVM"
+  resource_group_name   = "rg-prabha"
+  nsg_data_name         = "backend-nsg"
+}
+
