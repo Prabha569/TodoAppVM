@@ -37,6 +37,7 @@ module "backend_subnet" {
 
 module "frontend_pip" {
   source = "../modules/azurerm_public_ip"
+  depends_on = [ module.resource_group ]
 
   public_ip_name        = "prabha-frontend-pip"
   resource_group_name   = "rg-prabha"
@@ -46,6 +47,7 @@ module "frontend_pip" {
 
 module "backend_pip" {
   source = "../modules/azurerm_public_ip"
+  depends_on = [ module.resource_group ]
 
   public_ip_name        = "prabha-backtend-pip"
   resource_group_name   = "rg-prabha"
