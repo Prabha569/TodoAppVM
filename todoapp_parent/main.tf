@@ -97,6 +97,6 @@ module "backend-vm" {
   image_version           = "latest"
   data_subnet_name        = "prabha-backend-subnet"
   virtual_network_name    = "prabha-vnet"
-  data_public_ip_name     = "prabha-backtend-pip"
+  data_public_ip_name     = "prabha-backend-pip"
 }
 
