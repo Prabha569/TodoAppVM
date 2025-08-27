@@ -1,20 +1,48 @@
 trigger: none
 pool: Prabhas-Agent-Pools
 
-
-parameters:
-  - name: doStep1
-    type: boolean
-    default: true
-  - name: doStep2
-    type: boolean
-    default: false
+variables: 
+  config_path: '$(System.DefaultWorkingDirectory)/todoapp_parent'
+  service_conn: 'PrabhaSC-WIF'
 
 steps:
-- script: echo "Step 1 chal raha hai"
-  displayName: Step 1
-  condition: eq('${{ parameters.doStep1 }}', true)
+- task: TerraformInstaller@1
+  displayName: Terraform Install
+  inputs:
+    terraformVersion: 'latest'
 
-- script: echo "Step 2 chal raha hai"
-  displayName: Step 2
-  condition: eq('${{ parameters.doStep2 }}', true)
+- task: TerraformTask@5
+  displayName: Terraform Init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: $(config_path) 
+    backendServiceArm: $(service_conn) 
+    backendAzureRmStorageAccountName: 'krishnastg5678'
+    backendAzureRmContainerName: 'tfstate'
+    backendAzureRmKey: 'prod.terraform.tfstate'
+
+- task: TerraformTask@5
+  displayName: Terraform  Fmt
+  inputs:
+    provider: 'azurerm'
+    command: 'custom'
+    workingDirectory: $(config_path) 
+    outputTo: 'console'
+    customCommand: 'fmt'
+    environmentServiceNameAzureRM: $(service_conn) 
+
+- task: TerraformTask@5
+  displayName: Terraform Validate
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: $(config_path) 
+
+- task: TerraformTask@5
+  displayName: Terraform Plan 
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: $(config_path) 
+    environmentServiceNameAzureRM: $(service_conn) 
